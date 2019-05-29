@@ -1,0 +1,4 @@
+{{ object.Name }}
+{{ object.Author }}
+{{ object.Category }}
+{{ object.Body }}

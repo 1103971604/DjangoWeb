@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load func %}
+
+{% block title%} 主页{% endblock %}
+{% block body %}
+
+<!--轮播-->
+<div class="slider">
+	<ul class="rslides" id="slider">
+
+		{% GetAds as ads %}
+		{% for i in ads %}
+			<li>
+			<img src="/static/media/{{ i.Img }}" alt="" />
+			</li>
+		{% empty %}
+			<li>
+			没有轮播图
+			</li>
+		{% endfor %}
+
+	</ul>
+</div>
+
+<!-- 轮播样式 -->
+<script src="/static/js/responsiveslides.min.js"></script>
+<script>
+	$(function () {
+		$("#slider").responsiveSlides({
+			auto: true,
+			nav: true,
+			speed: 800,
+			namespace: "callbacks",
+			pager: true,
+		});
+	});
+</script>
+
+
+<!--热门游戏-->
+<div class="trend-w3layouts">
+	<div class="container">
+		<h2>热门游戏</h2>
+		<ul id="flexiselDemo1">
+			{% GetHotGames 5 as Games %}
+			{% for game in Games%}
+				<li>
+					<div class="trend-grid">
+						<h4>{{ game.Category }}</h4>
+						<img src="/static/media/{{ game.Img }}" alt=" " class="img-responsive" />
+					</div>
+				</li>
+			{% endfor %}
+			</ul>
+		<script type="text/javascript">
+							$(window).load(function() {
+								$("#flexiselDemo1").flexisel({
+									visibleItems: 4,
+									animationSpeed: 1000,
+									autoPlay: true,
+									autoPlaySpeed: 3000,
+									pauseOnHover: true,
+									enableResponsiveBreakpoints: true,
+									responsiveBreakpoints: {
+										portrait: {
+											changePoint:480,
+											visibleItems: 2
+										},
+										landscape: {
+											changePoint:640,
+											visibleItems:3
+										},
+										tablet: {
+											changePoint:768,
+											visibleItems: 4
+										}
+									}
+								});
+
+							});
+					</script>
+		<script type="text/javascript" src="/static/js/jquery.flexisel.js"></script>
+	</div>
+</div>
+
+
+
+<!-- 新游戏 -->
+<div class="new-w3-agile">
+	<div class="container">
+		<h3>近期新作</h3>
+		{% GetNewGames 4 as NewGames %}
+		{% for game in NewGames %}
+			<div class="col-md-3 new-grid-w3l view view-eighth">
+			<img src="/static/media/{{ game.Img }}" alt=" " />
+			<div class="mask">
+				<a href="{% url 'app1:single' game.id|add:-1 %}"><h4>{{ game.Name }}</h4></a>
+				<p>{{ game.Author }}</p>
+			</div>
+		</div>
+		{% endfor %}
+
+		<div class="clearfix"></div>
+	</div>
+</div>
+<!-- //new games-->
+
+<div class="tlinks">Collect from <a href="http://www.cssmoban.com/" >网页模板</a></div>
+
+<div class="services-bottom-w3-agileits">
+		<div class="container">
+			<div class="wthree_info">
+				<section class="slider">
+					<div class="flexslider">
+						<ul class="slides">
+							<li>
+								<div class="wthree_info_grid">
+									<h3>Duis aute dolor reprehenderit</h3>
+									<p>Excepteur sint occaecat cupidatat non proident, sunt officia.</p>
+									<a href="single.html" class="learn">Learn More</a>
+								</div>
+							</li>
+							<li>
+								<div class="wthree_info_grid">
+									<h3>Aliquip commodo consequat</h3>
+									<p>Curabitur lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+									<a href="single.html" class="learn">Learn More</a>
+								</div>
+							</li>
+							<li>
+								<div class="wthree_info_grid">
+									<h3>Quis autem vel eum iure ea</h3>
+									<p>Phasellus ornare consectetur erat, eu vehicula orci finibus at.</p>
+									<a href="single.html" class="learn">Learn More</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+						<!-- flexSlider -->
+
+							<script defer src="/static/js/jquery.flexslider.js"></script>
+							<script type="text/javascript">
+							$(window).load(function(){
+							  $('.flexslider').flexslider({
+								animation: "slide",
+								start: function(slider){
+								  $('body').removeClass('loading');
+								}
+							  });
+							});
+						  </script>
+						<!-- //flexSlider -->
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+
+
+

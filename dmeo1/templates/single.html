@@ -1,0 +1,110 @@
+{% extends 'base1.html' %}
+{% load func %}
+
+{% block title %}详情{% endblock %}
+
+{% block x %}
+详情
+{% endblock %}
+
+
+
+{% block body %}
+
+<!-- breadcrumbs -->
+	<div class="agileits_breadcrumbs">
+		<div class="container">
+			<div class="agileits_breadcrumbs_left">
+				<ul>
+					<li><a href="{% url 'app1:index' %}">Home</a><i>|</i></li>
+					<li>Single</li>
+				</ul>
+			</div>
+			<div class="agileits_breadcrumbs_right">
+				<h3>Single</h3>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+<!-- //breadcrumbs -->
+<!-- single -->
+	<div class="blog">
+		<div class="container">
+			<div class="col-md-7 wthree_blog_left">
+				<div class="wthree_blog_left_grid">
+					<div class="wthree_blog_left_grid_slider">
+						<img src="/static/media/{{good.Img}}" alt=" " class="img-responsive"  />
+					</div>
+					<h4>详情</h4>
+					<h3>{{good.Name}}</h3>
+					<ul>
+						<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a href="#">{{good.Author}}</a><i>|</i></li>
+						<li><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>{{good.ReadNum}}<i>|</i></li>
+						<li><span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a href="#">{{good.Update_Time}}</a><i>|</i></li>
+						<li><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>类型: {{good.Category}}</li>
+					</ul>
+					<p>{{good.Body}}</p>
+				</div>
+
+				
+				<div class="agileits_reply">
+					<h3>发表评论</h3>
+					<form action="#" method="post">
+						{% csrf_token %}
+						<input type="text" name="Name" placeholder="用户名" required="">
+						<input type="email" name="Email" placeholder="邮箱" required="">
+						<input type="text" name="Subject" placeholder="标题" required="">
+						<textarea name="Message" placeholder="你想说的话" required=""></textarea>
+						<input type="submit" value="发表">
+					</form>
+				</div>
+			</div>
+			<div class="col-md-5 wthree_blog_right">
+				<div class="w3ls_search">
+					<form action="/search/" method="get" id="searchform">
+						<input type="text" name="q" placeholder="搜索" required="">
+						<input type="submit" value=" ">
+					</form>
+				</div>
+				<div class="w3l_categories">
+					<h3>热点推荐 <span><sub>TOP5</sub></span></h3>
+					<ul>
+						{% GetHotGames 5 as Games %}
+						{% for game in Games %}
+							<li><a href="{% url 'app1:single' game.id %}">{{game.Name}}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+
+
+
+				<div class="w3agile_flickr_posts">
+					<h3>Flickr Posts</h3>
+					<div class="w3agile_flickr_post_left">
+						<a href="single.html"><img src="/static/images/ng1.jpg" alt=" " class="img-responsive" /></a>
+					</div>
+					<div class="w3agile_flickr_post_left">
+						<a href="single.html"><img src="/static/images/ng2.jpg" alt=" " class="img-responsive" /></a>
+					</div>
+					<div class="w3agile_flickr_post_left">
+						<a href="single.html"><img src="/static/images/ng3.jpg" alt=" " class="img-responsive" /></a>
+					</div>
+					<div class="w3agile_flickr_post_left">
+						<a href="single.html"><img src="/static/images/ng4.jpg" alt=" " class="img-responsive" /></a>
+					</div>
+					<div class="w3agile_flickr_post_left">
+						<a href="single.html"><img src="/static/images/ng5.jpg" alt=" " class="img-responsive" /></a>
+					</div>
+					<div class="w3agile_flickr_post_left">
+						<a href="single.html"><img src="/static/images/ng6.jpg" alt=" " class="img-responsive" /></a>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+<!-- //single -->	
+
+{% endblock %}
+
