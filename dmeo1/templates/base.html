@@ -82,7 +82,7 @@
 		</div>
 		<div class="col-md-5 footer-middle-w3">
 			<h4>最新的游戏</h4>
-			{% GetNewGames as games%}
+			{% GetNewGames 4 as games%}
 			{% for i in games %}
 				<div class="col-md-3 img-w3-agile">
 					<a href="{% url 'app1:single' i.id %}"><img src="/static/media/{{i.Img}}" alt=" " /></a>

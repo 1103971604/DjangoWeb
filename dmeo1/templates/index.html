@@ -94,7 +94,7 @@
 			<div class="col-md-3 new-grid-w3l view view-eighth">
 			<img src="/static/media/{{ game.Img }}" alt=" " />
 			<div class="mask">
-				<a href="{% url 'app1:single' game.id|add:-1 %}"><h4>{{ game.Name }}</h4></a>
+				<a href="{% url 'app1:single' game.id %}"><h4>{{ game.Name }}</h4></a>
 				<p>{{ game.Author }}</p>
 			</div>
 		</div>

@@ -33,7 +33,7 @@
 			<div class="col-md-7 wthree_blog_left">
 				<div class="wthree_blog_left_grid">
 					<div class="wthree_blog_left_grid_slider">
-						<img src="/static/media/{{good.Img}}" alt=" " class="img-responsive"  />
+						<img src="/static/images/s1.jpg" alt=" " class="img-responsive"  />
 					</div>
 					<h4>详情</h4>
 					<h3>{{good.Name}}</h3>
@@ -46,10 +46,10 @@
 					<p>{{good.Body}}</p>
 				</div>
 
-				
+
 				<div class="agileits_reply">
 					<h3>发表评论</h3>
-					<form action="#" method="post">
+					<form action="{% url 'app1:comment' good.id %}" method="post">
 						{% csrf_token %}
 						<input type="text" name="Name" placeholder="用户名" required="">
 						<input type="email" name="Email" placeholder="邮箱" required="">
@@ -58,48 +58,84 @@
 						<input type="submit" value="发表">
 					</form>
 				</div>
+
+
 			</div>
-			<div class="col-md-5 wthree_blog_right">
+
+			<div class="col-md-5 single-page-right">
 				<div class="w3ls_search">
 					<form action="/search/" method="get" id="searchform">
 						<input type="text" name="q" placeholder="搜索" required="">
 						<input type="submit" value=" ">
 					</form>
 				</div>
-				<div class="w3l_categories">
-					<h3>热点推荐 <span><sub>TOP5</sub></span></h3>
-					<ul>
-						{% GetHotGames 5 as Games %}
+				<br>
+				<div class="col-md-12 single-page-right">
+					<div class="category blog-ctgry">
+					<h2>热门游戏</h2>
+						<br>
+					<div class="list-group">
+						{% GetHotGames 8 as Games %}
 						{% for game in Games %}
-							<li><a href="{% url 'app1:single' game.id %}">{{game.Name}}</a></li>
+						<a href="{% url 'app1:single' game.id %}" class="list-group-item">{{game.Name}}</a>
 						{% endfor %}
-					</ul>
+
+					</div>
+					</div>
+				</div>
+				<div class="recent-posts">
+					<h2>最近的帖子</h2>
+					<br>
+					{% GetNewGames 3 as Games %}
+					{% for game in Games %}
+					<div class="recent-posts-info">
+						<div class="col-md-3 single-page-right">
+							<a href="single.html"> <img src="/static/media/{{game.Img}}" class="img-responsive zoom-img" alt=""> </a>
+						</div>
+						<div class="posts-right">
+							<label>游戏名：{{game.Name}}</label>
+							<br>
+							<label>作者：{{game.Author}}</label>
+							<p>简介：{{game.Body|Delstr:20}}...</p>
+							<a href="{% url 'app1:single' game.id %}" class="btn btn-primary hvr-rectangle-in">更多</a>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<br>
+					{% endfor %}
+
+				</div>
+				<div class="wthree_blog_left_grid">
+					<h4>评论</h4>
+					{% for i in a %}
+					<div class="media response-info">
+						<div class="col-md-3 wthree_blog_left">
+							<div class="media-left response-text-left">
+							<a href="#">
+								<img class="media-object" src="/static/images/icon1.png" alt="">
+							</a>
+								<br>
+							<h5><a href="#">{{i.Name}}</a></h5>
+						</div></div>
+
+						<div class="media-body response-text-right">
+							<p>{{i.Message}}</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					{% empty %}
+					暂无评论
+					{% endfor %}
+
 				</div>
 
 
+			</div>
 
-				<div class="w3agile_flickr_posts">
-					<h3>Flickr Posts</h3>
-					<div class="w3agile_flickr_post_left">
-						<a href="single.html"><img src="/static/images/ng1.jpg" alt=" " class="img-responsive" /></a>
-					</div>
-					<div class="w3agile_flickr_post_left">
-						<a href="single.html"><img src="/static/images/ng2.jpg" alt=" " class="img-responsive" /></a>
-					</div>
-					<div class="w3agile_flickr_post_left">
-						<a href="single.html"><img src="/static/images/ng3.jpg" alt=" " class="img-responsive" /></a>
-					</div>
-					<div class="w3agile_flickr_post_left">
-						<a href="single.html"><img src="/static/images/ng4.jpg" alt=" " class="img-responsive" /></a>
-					</div>
-					<div class="w3agile_flickr_post_left">
-						<a href="single.html"><img src="/static/images/ng5.jpg" alt=" " class="img-responsive" /></a>
-					</div>
-					<div class="w3agile_flickr_post_left">
-						<a href="single.html"><img src="/static/images/ng6.jpg" alt=" " class="img-responsive" /></a>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
+
+
+
+
 			</div>
 			<div class="clearfix"> </div>
 		</div>

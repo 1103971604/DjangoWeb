@@ -9,4 +9,5 @@ urlpatterns=[
     url(r'^news/(\d+)/$',views.news,name='news'),
     url(r'^game/$',views.game,name='game'),
     url(r'^fl/(\d+)/$',views.fl,name='fl'),
+    url(r'^comment/(\d+)/$',views.comment,name='comment'),
 ]

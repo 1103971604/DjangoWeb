@@ -1,5 +1,5 @@
 from django import template
-from ..models import AddImg,GmaeInfo,CategroyInfo
+from ..models import AddImg,GmaeInfo,CategroyInfo,Comment
 register=template.Library()
 
 @register.filter()
@@ -29,7 +29,10 @@ def GetNewGames(num=8):
 def GetCategroyInfo():
     return CategroyInfo.objects.all()
 
-
+@register.simple_tag()
+def Getcomments(id):
+    print(id)
+    return Comment.objects.filter(pk=id)
 
 
 

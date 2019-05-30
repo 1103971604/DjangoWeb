@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,reverse
 from django.http import HttpResponse,HttpResponseRedirect
-from .models import GmaeInfo,CategroyInfo
+from .models import GmaeInfo,CategroyInfo,Comment
 from django.core.mail import send_mail
 from django.conf import settings
 from django.core.paginator import Paginator
@@ -15,6 +15,12 @@ def single(request,id):
     good=GmaeInfo.objects.get(pk=id)
     good.ReadNum+=1
     good.save()
+
+    a=good.comment_set.all()
+
+
+
+
     return render(request,'single.html',locals())
 
 def game(request):
@@ -53,3 +59,19 @@ def fl(request,id):
     paginator = Paginator(games, 3)
     page = paginator.get_page(1)
     return render(request, 'news.html', {'page': page})
+
+
+
+
+
+def comment(request,id):
+    if request.method == 'POST':
+        comment=Comment()
+        comment.Name=request.POST.get('Name')
+        comment.Subject=request.POST.get('Subject')
+        comment.Emali=request.POST.get('Email')
+        comment.Message=request.POST.get('Message')
+        comment.Game=GmaeInfo.objects.get(pk=id)
+        comment.save()
+        return redirect(reverse('app1:single',args=(id,)))
+
