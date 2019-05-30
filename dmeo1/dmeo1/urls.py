@@ -18,7 +18,8 @@ from django.urls import path
 from django.conf.urls import url,include
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url('app1/',include('app1.urls',namespace='app1')),
+
     url(r'^search/', include('haystack.urls')),
+    url('', include('app1.urls', namespace='app1')),
 
 ]
