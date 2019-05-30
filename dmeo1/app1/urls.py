@@ -2,7 +2,6 @@ from django.conf.urls import url
 from . import views
 app_name='app1'
 urlpatterns=[
-
     url(r'^single/(\d+)/$',views.single,name='single'),
     # url(r'^/$',views.index,name='index'),
     url(r'^contact/$',views.contact,name='contact'),
